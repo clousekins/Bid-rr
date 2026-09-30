@@ -1,0 +1,27 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+node_modules/
+frontend/dist/
+data/
+!frontend/src/data/
+!frontend/src/data/**
+tools/cloudflared.exe
+POONG_FULL_REQUIREMENTS.md
+*.db
+.DS_Store
+Thumbs.db
+backups/
+
+# Chromium writes these when it packs an unpacked extension. The .pem is a
+# signing private key; neither belongs in the repo.
+extension.crx
+extension.pem
+*.pem
+*.db-shm
+*.db-wal

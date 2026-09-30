@@ -1,0 +1,1451 @@
+/* === Production UI v3 — hero showcase, side rail, glass workspace === */
+
+:root {
+  --font-ui: "Plus Jakarta Sans", "DM Sans", system-ui, sans-serif;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --rail-width: 72px;
+  --hero-height: clamp(280px, 38vh, 420px);
+  --glass-bg: color-mix(in srgb, var(--surface-1) 82%, transparent);
+  --glass-border: color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-ui);
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* —— App shell —— */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1.25rem 1.5rem 0.85rem;
+  gap: 0.85rem;
+}
+
+.app-workspace.glass-panel {
+  flex: 1;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  box-shadow:
+    var(--shadow),
+    inset 0 1px 0 color-mix(in srgb, #fff 4%, transparent);
+  padding: 0.85rem 1rem 1.15rem;
+}
+
+.app-main-top {
+  margin-bottom: 0.35rem;
+}
+
+/* —— Side rail —— */
+.side-rail {
+  width: var(--rail-width);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.85rem 0.55rem;
+  border-right: 1px solid var(--line-soft);
+  background: color-mix(in srgb, var(--surface-0) 92%, #000);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 20;
+}
+
+.side-rail-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.side-rail-logo {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #041018;
+  background: linear-gradient(145deg, #38bdf8 0%, #6366f1 100%);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--profile-accent) 35%, transparent);
+  transition: transform 0.15s ease;
+}
+
+.side-rail-name {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+.side-rail-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.side-rail-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.55rem 0.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.side-rail-link:hover {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--line-soft);
+}
+
+.side-rail-link.subtle {
+  opacity: 0.85;
+}
+
+.side-rail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.side-rail-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.side-rail-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.side-rail-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.side-rail-persona {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.45rem 0.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+}
+
+.side-rail-persona-name {
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.persona-pill-initials {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--profile-accent) 22%, var(--surface-3));
+  color: var(--profile-accent);
+  border: 1px solid color-mix(in srgb, var(--profile-accent) 35%, var(--line));
+}
+
+/* —— Hero showcase —— */
+.hero-showcase {
+  position: relative;
+  height: var(--hero-height);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  isolation: isolate;
+}
+
+.hero-slides {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.1s ease-in-out;
+  pointer-events: none;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hero-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  transform: scale(1.06);
+  animation: heroKenBurns 14s ease-in-out infinite alternate;
+}
+
+.hero-slide:not(.active) .hero-slide-img {
+  animation: none;
+}
+
+@keyframes heroKenBurns {
+  from {
+    transform: scale(1.04) translate(0, 0);
+  }
+  to {
+    transform: scale(1.12) translate(-1.2%, -0.8%);
+  }
+}
+
+.hero-slide-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(6, 10, 18, 0.88) 0%, rgba(6, 10, 18, 0.55) 42%, rgba(6, 10, 18, 0.25) 100%),
+    linear-gradient(0deg, rgba(6, 10, 18, 0.65) 0%, transparent 45%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 1.75rem;
+}
+
+.hero-copy {
+  max-width: min(560px, 62%);
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--profile-accent);
+  margin-bottom: 0.45rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--profile-accent) 40%, transparent);
+  background: color-mix(in srgb, var(--profile-accent) 12%, transparent);
+}
+
+.hero-title {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #f8fafc;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+.hero-body {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, #e2e8f0 92%, transparent);
+  max-width: 48ch;
+}
+
+.hero-credit {
+  margin: 0;
+  font-size: 0.68rem;
+  opacity: 0.75;
+}
+
+.hero-metrics {
+  display: flex;
+  gap: 0.65rem;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.hero-metric {
+  min-width: 5.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, #fff 12%, transparent);
+  background: color-mix(in srgb, var(--surface-0) 55%, transparent);
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+.hero-metric-value {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #f8fafc;
+  line-height: 1.1;
+}
+
+.hero-metric-label {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-controls {
+  position: absolute;
+  z-index: 3;
+  bottom: 0.85rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.hero-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.hero-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, #fff 35%, transparent);
+  background: color-mix(in srgb, #fff 18%, transparent);
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.hero-dot.active {
+  background: var(--profile-accent);
+  border-color: var(--profile-accent);
+  transform: scale(1.15);
+}
+
+.hero-collapse-btn,
+.hero-expand-btn {
+  font-size: 0.72rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-0) 70%, transparent);
+  border: 1px solid color-mix(in srgb, #fff 14%, transparent);
+  color: var(--text-muted);
+  backdrop-filter: blur(6px);
+}
+
+.hero-collapse-btn:hover,
+.hero-expand-btn:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--profile-accent) 40%, transparent);
+}
+
+.hero-collapsed-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-soft);
+  background: var(--surface-1);
+}
+
+.hero-collapsed-tagline {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.hero-collapsed-stat {
+  margin-left: auto;
+  font-size: 0.78rem;
+}
+
+/* —— Jobs empty state —— */
+.jobs-empty-state {
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  border: 1px dashed color-mix(in srgb, var(--profile-accent) 30%, var(--line));
+  background:
+    radial-gradient(400px 200px at 0% 50%, color-mix(in srgb, var(--profile-accent) 8%, transparent), transparent),
+    var(--surface-0);
+  min-height: 220px;
+}
+
+.jobs-empty-visual {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.jobs-empty-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jobs-empty-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, color-mix(in srgb, var(--profile-accent) 25%, transparent));
+}
+
+.jobs-empty-copy h3 {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 400;
+}
+
+.jobs-empty-copy p {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  max-width: 42ch;
+}
+
+/* —— Responsive —— */
+@media (max-width: 960px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .side-rail {
+    width: 100%;
+    height: auto;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0.55rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .side-rail-brand {
+    flex-direction: row;
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    gap: 0.5rem;
+  }
+
+  .side-rail-nav {
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .side-rail-link {
+    flex-direction: row;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.65rem;
+  }
+
+  .side-rail-foot {
+    flex-direction: row;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    gap: 0.5rem;
+  }
+
+  .side-rail-persona {
+    flex-direction: row;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .app-main {
+    padding: 0.65rem;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.15rem;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .hero-metrics {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .jobs-empty-state {
+    grid-template-columns: 1fr;
+  }
+
+  .jobs-empty-visual {
+    max-height: 180px;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero-metrics {
+    flex-wrap: wrap;
+  }
+
+  .hero-metric {
+    min-width: calc(33% - 0.5rem);
+    flex: 1;
+  }
+}
+
+/* --- Application outcome (what the employer did after we applied) --- */
+.outcome-select {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.outcome-select:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* Outcome carries the signal — colour it so a scan of the list reads. */
+.outcome-select.outcome-interview,
+.outcome-select.outcome-offer {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.outcome-select.outcome-screen {
+  border-color: var(--profile-accent);
+  color: var(--profile-accent);
+}
+
+.outcome-select.outcome-rejected,
+.outcome-select.outcome-ghosted {
+  border-color: var(--line);
+  color: var(--text-faint);
+}
+
+.outcome-sent {
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+/* Submission screenshot — proof of what was actually sent. */
+.doc-viewer-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  background: var(--surface-1);
+  border-radius: 6px;
+}
+
+/* ============================================================
+   Scores — technical fit and resume ATS
+   A number without its reasoning is not actionable, so badges
+   carry their matched/missing terms and the detail panel spells
+   them out.
+   ============================================================ */
+.score-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.1rem 0.42rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  cursor: help;
+}
+
+.score-badge .score-label {
+  color: var(--text-faint);
+  font-size: 0.72rem;
+}
+
+.score-badge .score-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-compact {
+  padding: 0.05rem 0.34rem;
+  min-width: 2.1rem;
+  justify-content: center;
+}
+
+.score-strong { border-color: var(--accent-2); color: var(--accent-2); }
+.score-good   { border-color: var(--profile-accent); color: var(--profile-accent); }
+.score-fair   { border-color: var(--warn); color: var(--warn); }
+.score-weak   { border-color: var(--danger); color: var(--danger); }
+.score-none   { color: var(--text-faint); }
+
+/* The td must stay a table-cell — display:flex on it drops the cell out of
+   the column model and shifts every column after it. Flex goes on a child. */
+.cell-score {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.cell-score-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.score-sep { color: var(--text-faint); font-size: 0.75rem; }
+.col-score { width: 7.6rem; }
+
+.score-detail { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.score-detail-head { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; }
+.score-note { color: var(--text-muted); font-size: 0.8rem; }
+
+.score-terms {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.score-terms-label {
+  color: var(--text-faint);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 0.15rem;
+}
+
+.score-chip {
+  padding: 0.05rem 0.36rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  border: 1px solid transparent;
+}
+
+.score-chip-missing { color: var(--danger); border-color: var(--danger); opacity: 0.85; }
+.score-chip-matched { color: var(--accent-2); border-color: var(--accent-2); opacity: 0.7; }
+
+.detail-row-block {
+  align-items: flex-start;
+}
+
+/* ============================================================
+   Minimum ATS score
+   ============================================================ */
+.ats-floor {
+  /* .action-grid is flex, not grid, so this sizes to its own content — the
+     box visibly grew when the >=90 warning appeared. Claim the full row and
+     let the text wrap inside a width that does not move. */
+  flex: 1 0 100%;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.ats-floor-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ats-floor-title { font-weight: 600; font-size: 0.86rem; }
+
+.ats-floor-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.ats-floor-value.on { color: var(--profile-accent); }
+.ats-floor-value.off { color: var(--text-faint); font-size: 0.85rem; font-weight: 500; }
+
+.ats-floor-range { width: 100%; accent-color: var(--profile-accent); cursor: pointer; }
+
+/* --- Resume accent picker -------------------------------------------------
+   Same box as .ats-floor so the two controls read as one settings group. */
+
+.accent-picker {
+  flex: 1 0 100%;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.accent-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.accent-title { font-weight: 600; font-size: 0.86rem; }
+.accent-value { font-size: 0.85rem; }
+
+.accent-swatches { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.accent-swatch {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  /* The border is always present so selecting one does not shift the others. */
+  border: 2px solid transparent;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.28);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.accent-swatch:hover:not(:disabled) { transform: translateY(-1px); }
+
+/* Selected: a ring in the page's own outline colour, held off the swatch by a
+   white gap so it stays visible on the darker colours. */
+.accent-swatch.on {
+  border-color: var(--text);
+  box-shadow: inset 0 0 0 2px var(--surface-2), inset 0 0 0 3px rgba(0, 0, 0, 0.28);
+}
+
+.accent-swatch:focus-visible { outline: 2px solid var(--profile-accent); outline-offset: 2px; }
+.accent-swatch:disabled { cursor: default; opacity: 0.6; }
+
+.accent-hint { font-size: 0.78rem; line-height: 1.35; }
+
+
+.ats-floor-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+
+.ats-floor-attempts {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.ats-floor-attempts select {
+  font: inherit;
+  padding: 0.05rem 0.2rem;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  color: var(--text);
+}
+
+.ats-floor-warn {
+  margin: 0;
+  color: var(--warn);
+  font-size: 0.78rem;
+}
+
+/* The hint text must be allowed to shrink, or a long sentence pushes the
+   attempts selector out of the row. */
+.ats-floor-foot .muted {
+  min-width: 0;
+}
+
+/* ============================================================
+   Today's applications
+   ============================================================ */
+.today-stat { position: relative; }
+
+.today-stat.today-active .stat-value { color: var(--accent-2); }
+
+.today-stat .stat-sub {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.15rem;
+  font-size: 0.62rem;
+  color: var(--text-faint);
+}
+
+/* Credibility findings — what a reviewer could question, and where. */
+.credibility-findings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.credibility-findings li {
+  font-size: 0.79rem;
+  line-height: 1.4;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--line);
+  color: var(--text-muted);
+}
+
+.credibility-high { border-left-color: var(--danger); }
+.credibility-medium { border-left-color: var(--warn); }
+.credibility-low { border-left-color: var(--line); }
+
+.credibility-kind {
+  display: inline-block;
+  margin-right: 0.35rem;
+  padding: 0 0.3rem;
+  border-radius: 3px;
+  background: var(--surface-3);
+  color: var(--text-faint);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.credibility-evidence {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--text-faint);
+  font-size: 0.74rem;
+}
+
+.col-score { width: 10.4rem; }
+
+/* ============================================================
+   Jobs table — density and column budget
+   The fixed columns added up to ~617px inside a 768px table, so
+   Company and Title (22% + 36%) were crushed to "Sam…" / "Treb…".
+   Those two are how you identify a row; everything else is
+   secondary and now sized to what it actually needs.
+   ============================================================ */
+.jobs-table .col-check { width: 2rem; }
+.jobs-table .col-seq { width: 2.6rem; }
+.jobs-table .col-company { width: auto; min-width: 9rem; }
+.jobs-table .col-title { width: auto; min-width: 12rem; }
+/* The cell only holds a two-letter code, but the header word "COUNTRY" is
+   uppercased and letter-spaced, and it sets the real minimum — at 3.4rem it
+   truncated to "COUNTI". */
+.jobs-table .col-country { width: 5.4rem; }
+.jobs-table .col-domain { width: 4.1rem; }
+.jobs-table .col-score { width: 6.5rem; }
+/* Status holds a pill plus up to three actions; starving it made them
+   wrap to two lines and pushed Others off the right edge. */
+/* Measured: the widest row needs 194px for pill + Resume + Cover + Apply.
+   13.5rem leaves headroom for a longer pill ("Need resume", "Generating")
+   without clipping the last button. */
+.jobs-table .col-my-status { width: 15rem; }
+.jobs-table .col-others { width: 3.8rem; }
+
+/* One line per row. The action buttons were stacking three deep,
+   which made rows 89px tall — three visible on a laptop screen. */
+.jobs-table tbody tr {
+  height: 3.6rem;
+}
+
+.jobs-table tbody td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  vertical-align: middle;
+}
+
+/* Same trap as the score cell: display:flex on a <td> drops it out of the
+   row model, so it sized to its content (40px) while every sibling was 58px
+   and the whole cell sat misaligned. Flex belongs on a child. */
+.jobs-table .cell-status {
+  /* Overrides the base .cell-status rule in styles.css, which sets flex. */
+  display: table-cell;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.jobs-table .cell-status-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.22rem;
+}
+
+.jobs-table .cell-status-wrap .pill {
+  flex: 0 0 auto;
+  font-size: 0.72rem;
+  padding: 0.08rem 0.4rem;
+}
+
+/* Actions stay one click away but stop dominating the row. */
+.jobs-table .cell-status-wrap button,
+.jobs-table .cell-status-wrap .doc-preview-btn {
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  padding: 0.14rem 0.36rem;
+  line-height: 1.5;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0.72;
+  transition: opacity 120ms ease, border-color 120ms ease;
+}
+
+/* Nothing in this cell may wrap — a second line is what made rows 89px. */
+.jobs-table .cell-status,
+.jobs-table .cell-status * {
+  white-space: nowrap;
+}
+
+.jobs-table .cell-others {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.jobs-table tbody tr:hover .cell-status-wrap button,
+.jobs-table tbody tr.active .cell-status-wrap button,
+.jobs-table tbody tr:hover .cell-status-wrap .doc-preview-btn,
+.jobs-table tbody tr.active .cell-status-wrap .doc-preview-btn {
+  opacity: 1;
+}
+
+/* Scores: drop the slashes to their own hairline so three numbers
+   read as one unit instead of a sentence. */
+.cell-score-wrap { gap: 0.1rem; }
+.cell-score .score-sep { display: none; }
+
+.cell-score .score-badge + .score-badge {
+  margin-left: 0.14rem;
+  position: relative;
+}
+
+.cell-score .score-badge + .score-badge::before {
+  content: "";
+  position: absolute;
+  left: -0.14rem;
+  top: 20%;
+  bottom: 20%;
+  width: 1px;
+  background: var(--line);
+  opacity: 0.5;
+}
+
+.cell-score .score-compact {
+  min-width: 1.8rem;
+  padding: 0.06rem 0.2rem;
+  font-size: 0.75rem;
+}
+
+/* The header should stay put while a long page scrolls. */
+.jobs-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-2);
+}
+
+.jobs-table tbody tr {
+  transition: background 110ms ease;
+}
+
+.jobs-table tbody tr.active {
+  box-shadow: inset 2px 0 0 var(--profile-accent);
+}
+
+/* The jobs table was being asked to fit eight columns into 768px, which is
+   why every fix so far cost another column its width. Give it the room and
+   the shaving stops; the detail panel still clears its 320px minimum. */
+.layout {
+  grid-template-columns: minmax(0, 1.75fr) minmax(340px, 0.9fr);
+}
+
+/* ============================================================
+   Special field — search one industry sector
+   ============================================================ */
+.sector-panel {
+  flex: 1 0 100%;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sector-controls {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sector-input {
+  flex: 1 1 18rem;
+  min-width: 0;
+  font: inherit;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  color: var(--text);
+}
+
+.sector-summary {
+  font-size: 0.84rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.sector-list {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 22rem;
+  overflow-y: auto;
+}
+
+.sector-list li {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.sector-list li.picked {
+  border-color: var(--profile-accent);
+  background: color-mix(in srgb, var(--profile-accent) 8%, var(--surface-2));
+}
+
+.sector-list label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.sector-company {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sector-title {
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sector-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.74rem;
+  margin-top: 0.15rem;
+  padding-left: 1.3rem;
+}
+
+.sector-source {
+  color: var(--profile-accent);
+}
+
+/* The words that matched — a wrong hit should be obvious before importing. */
+.sector-matched {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.22rem;
+  margin-top: 0.25rem;
+  padding-left: 1.3rem;
+}
+
+.sector-term {
+  font-size: 0.68rem;
+  padding: 0.02rem 0.3rem;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 45%, transparent);
+  color: var(--accent-2);
+}
+
+/* The default link colour is near-invisible on the dark panel. */
+.sector-meta a {
+  color: var(--profile-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sector-meta a:hover {
+  color: var(--text);
+}
+
+/* Own-employer filter — visible, because silently missing rows is worse
+   than a checkbox. */
+.own-employer-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  cursor: help;
+  white-space: nowrap;
+}
+
+.own-employer-toggle.on {
+  border-color: color-mix(in srgb, var(--warn) 55%, var(--line));
+  color: var(--text);
+}
+
+.own-employer-toggle strong {
+  color: var(--warn);
+}
+
+.own-employer-toggle input {
+  cursor: pointer;
+}
+
+/* Domain rows with the concrete job titles inside them. A domain says the
+   field; a title says the job, and picking "Senior Data Engineer" should not
+   return every data engineer. */
+.domain-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 24rem;
+  overflow-y: auto;
+}
+
+.domain-row {
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  padding: 0.35rem 0.45rem;
+  background: var(--surface-2);
+}
+
+.domain-row.active {
+  border-color: color-mix(in srgb, var(--profile-accent) 45%, var(--line));
+}
+
+.domain-row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.domain-row-toggle {
+  font-size: 0.72rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.domain-row-toggle:hover {
+  color: var(--text);
+  border-color: var(--profile-accent);
+}
+
+.domain-row-caret {
+  margin-left: 0.3rem;
+  opacity: 0.7;
+}
+
+.domain-role-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed var(--line-soft);
+}
+
+.role-chip {
+  font-size: 0.72rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.role-chip.active {
+  border-color: var(--profile-accent);
+  color: var(--profile-accent);
+  background: color-mix(in srgb, var(--profile-accent) 12%, var(--surface-1));
+}
+
+.role-chip-clear {
+  border-style: dashed;
+  color: var(--text-faint);
+}
+
+/* The chip lost its inner spacing when it moved into a domain row, so the
+   code and label ran together as "DEData Engineering". */
+.domain-row-head .seq-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+/* A source that refused has to say so; a silent zero reads as "no jobs". */
+.job-source-error {
+  margin: 0.35rem 0 0;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--warn) 45%, var(--line));
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
+  color: var(--warn);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+/* --- Fetch results ------------------------------------------------------- */
+/* What a run actually found. A fetch used to end in counters; the jobs it
+   collected were only reachable by hunting for them in the main table. */
+.fetch-results {
+  margin-top: 12px;
+  border-top: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+  padding-top: 10px;
+}
+
+.fetch-results-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.fetch-results-head h4 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fetch-results-head .muted {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* Where the run's CSV landed. A path is worth reading once, not styling. */
+.fetch-results-csv {
+  margin: 0 0 6px;
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.fetch-results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* Long enough to scan, bounded so it cannot push the panel off screen. */
+  max-height: 320px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.fetch-results-list li + li {
+  border-top: 1px solid var(--line-soft, rgba(255, 255, 255, 0.05));
+}
+
+.fetch-result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 6px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fetch-result-row:hover:not(:disabled) {
+  background: var(--hover, rgba(255, 255, 255, 0.05));
+}
+
+.fetch-result-row:disabled {
+  cursor: default;
+  opacity: 0.62;
+}
+
+.fetch-result-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  /* Must be allowed to shrink, or a long title pushes the posted time and the
+     status chip past the right edge of the panel where they cannot be read. */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fetch-result-main strong {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  /* Titles run long; clip rather than reflow the row height. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fetch-result-main em {
+  font-size: 11px;
+  font-style: normal;
+  opacity: 0.72;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fetch-result-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.fetch-result-posted {
+  font-size: 11px;
+  opacity: 0.66;
+  white-space: nowrap;
+}
+
+.fetch-result-state {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--chip-bg, rgba(255, 255, 255, 0.07));
+}
+
+.fetch-results-list li.ok .fetch-result-state {
+  background: var(--ok-bg, rgba(64, 192, 127, 0.16));
+  color: var(--ok-fg, #58cf94);
+}
+
+.fetch-results-list li.past .fetch-result-main strong {
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+
+/* --- Country column and filter -------------------------------------------
+   The cell shows the code so the column stays narrow at 3.4rem; hovering
+   gives the country name and the raw location it was derived from. */
+
+.jobs-table .cell-country {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+  color: var(--text-muted, inherit);
+  white-space: nowrap;
+}
+
+.filter-country {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.filter-country select {
+  max-width: 12rem;
+}
